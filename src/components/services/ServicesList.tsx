@@ -47,7 +47,7 @@ const ServicesList: React.FC<ServicesListProps> = ({
             <div key={index}>
               <div className="flex flex-col gap-6 md:gap-9">
                 {/* Service Header */}
-                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-[71px]">
+                <div className="flex flex-col md:flex-row md:items-end gap-4 md:gap-[71px]">
                   <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-[72px] md:w-[616px]">
                     <span className="text-xl md:text-2xl font-medium text-[#535967] md:w-[31px]">
                       {String(index + 1).padStart(2, "0")}
@@ -57,7 +57,7 @@ const ServicesList: React.FC<ServicesListProps> = ({
                       text={service.title}
                     />
                   </div>
-                  <p className="text-sm md:text-lg lg:text-xl lg:leading-7 text-[#535967] md:w-[513px] md:h-14 flex items-center">
+                  <p className="text-sm md:text-lg lg:text-xl lg:leading-7 text-[#535967] md:w-[513px] md:mb-3">
                     {service.description}
                   </p>
                 </div>

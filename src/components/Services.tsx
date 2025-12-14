@@ -288,7 +288,7 @@ const Services = () => {
                 <div className="flex flex-col items-start self-stretch gap-6 md:gap-10">
                   {/* Service Header */}
                   <div
-                    className="flex flex-col md:flex-row md:items-center self-stretch cursor-pointer group gap-4 md:gap-8"
+                    className="flex flex-col md:flex-row md:items-end self-stretch cursor-pointer group gap-4 md:gap-8"
                     onClick={() => toggleService(service.id)}
                   >
                     {/* Header Section */}
@@ -302,7 +302,7 @@ const Services = () => {
                     </div>
 
                     {/* Description Section */}
-                    <div className="flex items-center justify-between gap-4 md:flex-row md:gap-[47px]">
+                    <div className="flex items-end justify-between gap-4 md:flex-row md:gap-[47px]">
                       <p className="font-urbanist text-base md:text-xl leading-6 md:leading-7 text-[#535967] md:w-[378px] flex-grow">
                         {service.description}
                       </p>

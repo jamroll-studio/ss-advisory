@@ -11,7 +11,7 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({ className = "" }) => {
   return (
     <PageHero
       sectionLabel="SERVICES"
-      title="Dedicated to empowering clients through reliable accounting, tax and VAT compliance, and end-to-end RJSC and corporate secretarial support."
+      title="Dedicated to accounting, tax & VAT compliance, and RJSC support."
       highlightedText="Dedicated to"
       imageSrc="/images/services/hero.png"
       imageAlt="Professional accounting services meeting"
