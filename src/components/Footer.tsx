@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import HTwoTextAnimation from "./HTwoTextAnimation";
 
 const Footer = () => {
@@ -14,7 +15,7 @@ const Footer = () => {
               text="Let's make something great work together"
               className="w-full"
             />
-            <div className="flex-shrink-0 absolute right-0 -top-10 w-32 h-32 lg:w-[200px] lg:h-[200px] self-start lg:self-center">
+            <div className="flex-shrink-0 absolute right-0 -top-10 w-32 h-32 lg:w-[200px] lg:h-[200px] self-start lg:self-center pointer-events-none">
               <Image
                 src="/images/megz9w7k-m7yknei.svg"
                 alt="Arrow icon"
@@ -54,18 +55,30 @@ const Footer = () => {
                 Useful link
               </h3>
               <div className="flex flex-col gap-3">
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                <Link
+                  href="/"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   Home
-                </p>
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                </Link>
+                <Link
+                  href="/about"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   About Us
-                </p>
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                </Link>
+                <Link
+                  href="/#testimonials"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   Testimonials
-                </p>
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                </Link>
+                <Link
+                  href="/contact"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   Contact US
-                </p>
+                </Link>
               </div>
             </div>
 
@@ -84,9 +97,12 @@ const Footer = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                <a
+                  href="tel:+8801752143459"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   +880 1752-143459
-                </p>
+                </a>
               </div>
             </div>
 
@@ -105,9 +121,12 @@ const Footer = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-3">
-                <p className="text-white/80 font-urbanist text-lg leading-[25px]">
+                <a
+                  href="mailto:contact@ssadvisorybd.com"
+                  className="text-white/80 font-urbanist text-lg leading-[25px] hover:text-white transition-colors"
+                >
                   contact@ssadvisorybd.com
-                </p>
+                </a>
               </div>
             </div>
           </div>

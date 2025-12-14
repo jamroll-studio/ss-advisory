@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type PointerEvent } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
@@ -44,6 +44,27 @@ const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const windowListenersAttachedRef = useRef(false);
+  const swipeRef = useRef<{
+    pointerId: number | null;
+    startX: number;
+    startY: number;
+    deltaX: number;
+    deltaY: number;
+    isActive: boolean;
+  }>({
+    pointerId: null,
+    startX: 0,
+    startY: 0,
+    deltaX: 0,
+    deltaY: 0,
+    isActive: false,
+  });
+  const windowHandlersRef = useRef<{
+    move: (e: globalThis.PointerEvent) => void;
+    up: (e: globalThis.PointerEvent) => void;
+    cancel: (e: globalThis.PointerEvent) => void;
+  } | null>(null);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileCardRef = useRef<HTMLDivElement>(null);
@@ -136,7 +157,7 @@ const Testimonials = () => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [currentIndex]); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex]);
 
   // Pause auto-rotation on hover
   const handleMouseEnter = () => {
@@ -152,8 +173,153 @@ const Testimonials = () => {
   const nextTestimonialData =
     testimonials[(currentIndex + 1) % testimonials.length];
 
+  const detachWindowSwipeListeners = () => {
+    if (!windowListenersAttachedRef.current) return;
+    windowListenersAttachedRef.current = false;
+    window.removeEventListener("pointermove", handleWindowPointerMove as unknown as EventListener);
+    window.removeEventListener("pointerup", handleWindowPointerUp as unknown as EventListener);
+    window.removeEventListener("pointercancel", handleWindowPointerCancel as unknown as EventListener);
+  };
+
+  const attachWindowSwipeListeners = () => {
+    if (windowListenersAttachedRef.current) return;
+    windowListenersAttachedRef.current = true;
+    window.addEventListener("pointermove", handleWindowPointerMove as unknown as EventListener, { passive: false });
+    window.addEventListener("pointerup", handleWindowPointerUp as unknown as EventListener, { passive: true });
+    window.addEventListener("pointercancel", handleWindowPointerCancel as unknown as EventListener, { passive: true });
+  };
+
+  // Keep the window handlers up-to-date with the latest stateful callbacks.
+  windowHandlersRef.current = {
+    move: (e: globalThis.PointerEvent) => {
+      const state = swipeRef.current;
+      if (!state.isActive || state.pointerId !== e.pointerId) return;
+
+      state.deltaX = e.clientX - state.startX;
+      state.deltaY = e.clientY - state.startY;
+
+      if (e.cancelable && Math.abs(state.deltaX) > Math.abs(state.deltaY)) {
+        e.preventDefault();
+      }
+    },
+    up: (e: globalThis.PointerEvent) => {
+      const state = swipeRef.current;
+      if (!state.isActive || state.pointerId !== e.pointerId) return;
+      detachWindowSwipeListeners();
+
+      const absX = Math.abs(state.deltaX);
+      const absY = Math.abs(state.deltaY);
+
+      state.isActive = false;
+      state.pointerId = null;
+
+      if (absX >= 50 && absX >= absY * 1.2) {
+        const nextIndex = (currentIndex + 1) % testimonials.length;
+        const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+        if (state.deltaX < 0) {
+          goToTestimonial(nextIndex);
+        } else {
+          goToTestimonial(prevIndex);
+        }
+      }
+
+      startAutoRotation();
+    },
+    cancel: (e: globalThis.PointerEvent) => {
+      const state = swipeRef.current;
+      if (!state.isActive || state.pointerId !== e.pointerId) return;
+      detachWindowSwipeListeners();
+      state.isActive = false;
+      state.pointerId = null;
+      startAutoRotation();
+    },
+  };
+
+  function handleWindowPointerMove(e: globalThis.PointerEvent) {
+    windowHandlersRef.current?.move(e);
+  }
+
+  function handleWindowPointerUp(e: globalThis.PointerEvent) {
+    windowHandlersRef.current?.up(e);
+  }
+
+  function handleWindowPointerCancel(e: globalThis.PointerEvent) {
+    windowHandlersRef.current?.cancel(e);
+  }
+
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (isAnimating) return;
+
+    // Pause auto-rotation while the user is interacting.
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+
+    swipeRef.current.pointerId = e.pointerId;
+    swipeRef.current.startX = e.clientX;
+    swipeRef.current.startY = e.clientY;
+    swipeRef.current.deltaX = 0;
+    swipeRef.current.deltaY = 0;
+    swipeRef.current.isActive = true;
+
+    attachWindowSwipeListeners();
+
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {
+      // Ignore capture failures (older Safari quirks)
+    }
+  };
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    const state = swipeRef.current;
+    if (!state.isActive || state.pointerId !== e.pointerId) return;
+
+    state.deltaX = e.clientX - state.startX;
+    state.deltaY = e.clientY - state.startY;
+
+    if (e.cancelable && Math.abs(state.deltaX) > Math.abs(state.deltaY)) {
+      e.preventDefault();
+    }
+  };
+
+  const finishSwipe = (e: PointerEvent<HTMLDivElement>) => {
+    const state = swipeRef.current;
+    if (!state.isActive || state.pointerId !== e.pointerId) return;
+
+    detachWindowSwipeListeners();
+
+    const absX = Math.abs(state.deltaX);
+    const absY = Math.abs(state.deltaY);
+
+    // Reset state first to avoid double-fires
+    state.isActive = false;
+    state.pointerId = null;
+
+    // Only treat as a swipe if it is clearly horizontal.
+    if (absX < 50 || absX < absY * 1.2) return;
+
+    const nextIndex = (currentIndex + 1) % testimonials.length;
+    const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+
+    // Swipe left -> next, swipe right -> previous.
+    if (state.deltaX < 0) {
+      goToTestimonial(nextIndex);
+    } else {
+      goToTestimonial(prevIndex);
+    }
+
+    startAutoRotation();
+  };
+
+  useEffect(() => {
+    return () => {
+      detachWindowSwipeListeners();
+    };
+  }, []);
+
   return (
-    <div ref={containerRef} className="flex flex-col items-start w-full bg-[#0d1321] px-4 py-8 gap-8 min-h-[501px] md:px-[120px] md:py-[100px] md:gap-[10px] md:min-h-[560px]">
+    <div id="testimonials" ref={containerRef} className="flex flex-col items-start w-full bg-[#0d1321] px-4 py-8 gap-8 min-h-[501px] md:px-[120px] md:py-[100px] md:gap-[10px] md:min-h-[560px]">
       <div className="flex flex-col w-full gap-8 md:gap-16">
         {/* Section Header */}
         <SectionLabel
@@ -171,9 +337,13 @@ const Testimonials = () => {
             {/* Mobile Testimonial Card */}
             <div
               ref={mobileCardRef}
-              className="grid grid-cols-1 w-full"
+              className="grid grid-cols-1 w-full touch-pan-y select-none"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={finishSwipe}
+              onPointerCancel={finishSwipe}
             >
               {testimonials.map((testimonial, index) => (
                 <div

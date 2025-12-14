@@ -450,7 +450,7 @@ const Hero = () => {
             >
               Expert Accounting
             </p>
-            <div className="flex items-center w-full gap-8">
+            <div className="flex items-end w-full gap-8">
               <Image
                 data-animate="hero-image-desktop"
                 src="/images/megv1vhw-qf19f4i.png"
@@ -476,12 +476,12 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <div className="inline-flex items-center w-full gap-[60px] mr-[92px]">
+          <div className="inline-flex items-start w-full gap-[60px] mr-[92px]">
             <p
               data-animate="advisory-desktop"
               className="text-[#b5bac5] font-playfair text-[100px] italic leading-[100px] tracking-[-4px] opacity-0"
             >
-              Advisory
+              SSAdvisory
             </p>
             <div className="inline-flex flex-col items-start gap-4">
               <p
