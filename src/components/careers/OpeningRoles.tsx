@@ -1,26 +1,28 @@
-'use client';
+"use client";
 
-import React from 'react';
-import JobCard from './JobCard';
-import SectionLabel from '../ui/SectionLabel';
-import HTwoTextAnimation from '../HTwoTextAnimation';
+import React from "react";
+import JobCard from "./JobCard";
+import SectionLabel from "../ui/SectionLabel";
+import HTwoTextAnimation from "../HTwoTextAnimation";
 
 const OpeningRoles = () => {
   const jobListings = [
     {
-      title: 'Senior Tax Accountant',
-      tags: ['Onsite', 'Fulltime', 'Dhaka, Bangladesh'],
-      deadline: '30 Dec 2024',
-      description: "Join our tax team to provide comprehensive tax planning, compliance, and advisory services to our diverse client portfolio.",
-      salary: '75,000'
+      title: "Senior Tax Accountant",
+      tags: ["Onsite", "Fulltime", "Dhaka, Bangladesh"],
+      deadline: "30 Dec 2024",
+      description:
+        "Join our tax team to provide comprehensive tax planning, compliance, and advisory services to our diverse client portfolio.",
+      salary: "75,000",
     },
     {
-      title: 'Audit Associate',
-      tags: ['Hybrid', 'Fulltime', 'Dhaka, Bangladesh'],
-      deadline: '15 Jan 2025',
-      description: "Support audit engagements and compliance reviews while developing expertise in financial reporting and regulatory requirements.",
-      salary: '55,000'
-    }
+      title: "Audit Associate",
+      tags: ["Hybrid", "Fulltime", "Dhaka, Bangladesh"],
+      deadline: "15 Jan 2025",
+      description:
+        "Support audit engagements and compliance reviews while developing expertise in financial reporting and regulatory requirements.",
+      salary: "55,000",
+    },
   ];
 
   const handleApply = (jobTitle: string) => {
@@ -34,19 +36,22 @@ const OpeningRoles = () => {
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-6 md:gap-0">
         {/* Section Header */}
         <div className="w-full md:w-[387px]">
-          <SectionLabel 
-            label="OPPORTUNITY" 
-            lineWidth="hidden md:block w-[200px]" 
-         
+          <SectionLabel
+            label="OPPORTUNITY"
+            lineWidth="hidden md:block w-[200px]"
           />
         </div>
-        
+
         {/* Title */}
         <div className="w-full md:w-[745px]">
-         <HTwoTextAnimation text="Opening Roles"  highlightStart='Opening' highlightEnd='Roles'/>
+          <HTwoTextAnimation
+            text="Opening Roles"
+            highlightStart="Opening"
+            highlightEnd="Roles"
+          />
         </div>
       </div>
-      
+
       {/* Job Cards */}
       <div className="flex flex-col md:flex-row items-center justify-center w-full gap-6 md:gap-8 overflow-x-auto">
         {jobListings.map((job, index) => (
