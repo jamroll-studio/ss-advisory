@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef, useCallback } from 'react';
-import { gsap } from 'gsap';
+import React, { useEffect, useRef, useCallback } from "react";
+import { gsap } from "gsap";
 
 interface InfiniteScrollProps {
   children: React.ReactNode;
   speed?: number;
-  direction?: 'left' | 'right';
+  direction?: "left" | "right";
   className?: string;
   pauseOnHover?: boolean;
   disableInfinite?: boolean; // Option to disable infinite looping
@@ -15,8 +15,8 @@ interface InfiniteScrollProps {
 const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   children,
   speed = 50,
-  direction = 'left',
-  className = '',
+  direction = "left",
+  className = "",
   pauseOnHover = false,
   disableInfinite = false,
 }) => {
@@ -30,7 +30,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     if (!containerRef.current || !contentRef.current) return;
 
     const content = contentRef.current;
-    
+
     // Kill existing timeline
     if (timelineRef.current) {
       timelineRef.current.kill();
@@ -45,17 +45,17 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     if (!Number.isFinite(contentWidth) || contentWidth <= 0) return;
 
     gsap.set(content, { x: 0, force3D: true });
-    
+
     // Set up GSAP timeline for scroll (infinite or one-time)
     timelineRef.current = gsap.timeline({ repeat: disableInfinite ? 0 : -1 });
-    
+
     const duration = contentWidth / speed;
-    const xMovement = direction === 'left' ? -contentWidth : contentWidth;
-    
+    const xMovement = direction === "left" ? -contentWidth : contentWidth;
+
     timelineRef.current.to(content, {
       x: xMovement,
       duration,
-      ease: 'none',
+      ease: "none",
       force3D: true,
     });
 
@@ -77,7 +77,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   useEffect(() => {
     const content = contentRef.current;
     if (!content) return;
-    
+
     setupAnimation();
 
     // One extra pass after first paint (helps Mobile Safari layout timing)
@@ -91,22 +91,24 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
     }, 250);
 
     // Set up ResizeObserver for responsive handling
-    if (typeof ResizeObserver !== 'undefined') {
+    if (typeof ResizeObserver !== "undefined") {
       resizeObserverRef.current = new ResizeObserver(handleResize);
-      if (containerRef.current) resizeObserverRef.current.observe(containerRef.current);
+      if (containerRef.current)
+        resizeObserverRef.current.observe(containerRef.current);
       // Observe content as well, since images can change scrollWidth without changing container width
       resizeObserverRef.current.observe(content);
     }
 
     // Recompute once images inside content finish loading
-    const imgs = Array.from(content.querySelectorAll('img'));
+    const imgs = Array.from(content.querySelectorAll("img"));
     const onImgLoad = () => handleResize();
     imgs.forEach((img) => {
-      if (!img.complete) img.addEventListener('load', onImgLoad, { once: true });
+      if (!img.complete)
+        img.addEventListener("load", onImgLoad, { once: true });
     });
 
     // Window resize fallback
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       if (timelineRef.current) {
@@ -118,10 +120,10 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       if (resizeTimeoutRef.current) {
         window.clearTimeout(resizeTimeoutRef.current);
       }
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
       window.cancelAnimationFrame(rafId);
       window.clearTimeout(timeoutId);
-      imgs.forEach((img) => img.removeEventListener('load', onImgLoad));
+      imgs.forEach((img) => img.removeEventListener("load", onImgLoad));
     };
   }, [setupAnimation, handleResize]);
 

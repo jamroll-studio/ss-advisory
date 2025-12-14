@@ -65,7 +65,7 @@ const Testimonials = () => {
     up: (e: globalThis.PointerEvent) => void;
     cancel: (e: globalThis.PointerEvent) => void;
   } | null>(null);
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
   const mobileCardRef = useRef<HTMLDivElement>(null);
   const desktopCardRef = useRef<HTMLDivElement>(null);
@@ -85,13 +85,13 @@ const Testimonials = () => {
       onComplete: () => {
         setCurrentIndex(newIndex);
         setIsAnimating(false);
-      }
+      },
     });
 
     // Elements to animate out (current index)
     const targets = [
       ...Array.from(getTargets(mobileCardRef.current, currentIndex)),
-      ...Array.from(getTargets(desktopCardRef.current, currentIndex))
+      ...Array.from(getTargets(desktopCardRef.current, currentIndex)),
     ];
 
     // Animate Out
@@ -100,7 +100,7 @@ const Testimonials = () => {
       y: -20,
       duration: 0.4,
       ease: "power2.in",
-      stagger: 0.05
+      stagger: 0.05,
     });
   };
 
@@ -108,22 +108,23 @@ const Testimonials = () => {
     // Animate In when currentIndex changes
     const targets = [
       ...Array.from(getTargets(mobileCardRef.current, currentIndex)),
-      ...Array.from(getTargets(desktopCardRef.current, currentIndex))
+      ...Array.from(getTargets(desktopCardRef.current, currentIndex)),
     ];
 
-    gsap.fromTo(targets, 
+    gsap.fromTo(
+      targets,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", stagger: 0.05 }
     );
-    
+
     // Animate Next Preview
     if (nextPreviewRef.current) {
-        gsap.fromTo(nextPreviewRef.current,
-            { scale: 0.9, opacity: 0.5 },
-            { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }
-        );
+      gsap.fromTo(
+        nextPreviewRef.current,
+        { scale: 0.9, opacity: 0.5 },
+        { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }
+      );
     }
-
   }, [currentIndex]);
 
   const nextTestimonial = () => {
@@ -135,7 +136,7 @@ const Testimonials = () => {
   const goToTestimonial = (index: number) => {
     if (isAnimating || index === currentIndex) return;
     animateChange(index);
-    
+
     // Reset auto-rotation timer
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -176,17 +177,38 @@ const Testimonials = () => {
   const detachWindowSwipeListeners = () => {
     if (!windowListenersAttachedRef.current) return;
     windowListenersAttachedRef.current = false;
-    window.removeEventListener("pointermove", handleWindowPointerMove as unknown as EventListener);
-    window.removeEventListener("pointerup", handleWindowPointerUp as unknown as EventListener);
-    window.removeEventListener("pointercancel", handleWindowPointerCancel as unknown as EventListener);
+    window.removeEventListener(
+      "pointermove",
+      handleWindowPointerMove as unknown as EventListener
+    );
+    window.removeEventListener(
+      "pointerup",
+      handleWindowPointerUp as unknown as EventListener
+    );
+    window.removeEventListener(
+      "pointercancel",
+      handleWindowPointerCancel as unknown as EventListener
+    );
   };
 
   const attachWindowSwipeListeners = () => {
     if (windowListenersAttachedRef.current) return;
     windowListenersAttachedRef.current = true;
-    window.addEventListener("pointermove", handleWindowPointerMove as unknown as EventListener, { passive: false });
-    window.addEventListener("pointerup", handleWindowPointerUp as unknown as EventListener, { passive: true });
-    window.addEventListener("pointercancel", handleWindowPointerCancel as unknown as EventListener, { passive: true });
+    window.addEventListener(
+      "pointermove",
+      handleWindowPointerMove as unknown as EventListener,
+      { passive: false }
+    );
+    window.addEventListener(
+      "pointerup",
+      handleWindowPointerUp as unknown as EventListener,
+      { passive: true }
+    );
+    window.addEventListener(
+      "pointercancel",
+      handleWindowPointerCancel as unknown as EventListener,
+      { passive: true }
+    );
   };
 
   // Keep the window handlers up-to-date with the latest stateful callbacks.
@@ -215,7 +237,8 @@ const Testimonials = () => {
 
       if (absX >= 50 && absX >= absY * 1.2) {
         const nextIndex = (currentIndex + 1) % testimonials.length;
-        const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+        const prevIndex =
+          (currentIndex - 1 + testimonials.length) % testimonials.length;
         if (state.deltaX < 0) {
           goToTestimonial(nextIndex);
         } else {
@@ -300,7 +323,8 @@ const Testimonials = () => {
     if (absX < 50 || absX < absY * 1.2) return;
 
     const nextIndex = (currentIndex + 1) % testimonials.length;
-    const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
+    const prevIndex =
+      (currentIndex - 1 + testimonials.length) % testimonials.length;
 
     // Swipe left -> next, swipe right -> previous.
     if (state.deltaX < 0) {
@@ -319,7 +343,11 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div id="testimonials" ref={containerRef} className="flex flex-col items-start w-full bg-[#0d1321] px-4 py-8 gap-8 min-h-[501px] md:px-[120px] md:py-[100px] md:gap-[10px] md:min-h-[560px]">
+    <div
+      id="testimonials"
+      ref={containerRef}
+      className="flex flex-col items-start w-full bg-[#0d1321] px-4 py-8 gap-8 min-h-[501px] md:px-[120px] md:py-[100px] md:gap-[10px] md:min-h-[560px]"
+    >
       <div className="flex flex-col w-full gap-8 md:gap-16">
         {/* Section Header */}
         <SectionLabel
@@ -350,7 +378,9 @@ const Testimonials = () => {
                   key={testimonial.id}
                   data-index={index}
                   className={`flex relative flex-col items-start w-full gap-8 col-start-1 row-start-1 transition-opacity duration-300 ${
-                    index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                    index === currentIndex
+                      ? "opacity-100 z-10"
+                      : "opacity-0 z-0 pointer-events-none"
                   }`}
                 >
                   <div className="relative overflow-hidden rounded-full w-20 h-20 animate-target">
@@ -429,7 +459,9 @@ const Testimonials = () => {
                   key={testimonial.id}
                   data-index={index}
                   className={`flex relative items-center gap-[60px] col-start-1 row-start-1 transition-opacity duration-300 ${
-                    index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                    index === currentIndex
+                      ? "opacity-100 z-10"
+                      : "opacity-0 z-0 pointer-events-none"
                   }`}
                 >
                   <div className="relative overflow-hidden rounded-full w-[173px] h-[173px] animate-target">
@@ -495,7 +527,10 @@ const Testimonials = () => {
             </button>
 
             {/* Next Testimonial Preview */}
-            <div ref={nextPreviewRef} className="relative transition-all duration-700 ease-out transform hover:scale-105">
+            <div
+              ref={nextPreviewRef}
+              className="relative transition-all duration-700 ease-out transform hover:scale-105"
+            >
               <div className="relative overflow-hidden rounded-full w-[173px] h-[173px]">
                 <Image
                   src={nextTestimonialData.avatar}

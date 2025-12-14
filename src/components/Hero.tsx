@@ -16,8 +16,6 @@ const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const rotatingWords = ["Growth", "Compliance", "Success"];
 
-
-
   const animateWordChange = useCallback(() => {
     const mobileElement = rotatingWordMobileRef.current;
     const desktopElement = rotatingWordDesktopRef.current;
@@ -57,7 +55,9 @@ const Hero = () => {
     // Word change happens exactly when out animation completes
     masterTimeline.call(
       () => {
-        setCurrentWordIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
+        setCurrentWordIndex(
+          (prevIndex) => (prevIndex + 1) % rotatingWords.length
+        );
       },
       [],
       0.5
