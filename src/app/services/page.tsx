@@ -6,78 +6,88 @@ import Testimonials from "@/components/Testimonials";
 
 export const metadata: Metadata = {
   title:
-    "Accounting & Tax Services - SS Advisory | Professional Business Solutions",
+    "Accounting, Tax, VAT & RJSC Services - SS Advisory | Professional Business Solutions",
   description:
-    "Comprehensive accounting, tax planning, and compliance services including bookkeeping, financial reporting, tax preparation, audit support, and regulatory compliance. Expert accounting services tailored to your business needs.",
+    "Comprehensive accounting, tax, VAT, and RJSC services including bookkeeping, financial reporting, return preparation, audit support, and statutory compliance. Professional support tailored to your business needs.",
   keywords:
-    "accounting services, tax planning, bookkeeping, financial reporting, tax preparation, compliance, audit support, payroll processing, business advisory, regulatory compliance",
+    "accounting services, bookkeeping, financial reporting, payroll processing, tax services, tax compliance, tax planning, VAT services, VAT compliance, VAT return, RJSC services, company formation, statutory compliance, audit support",
 
   openGraph: {
     title:
-      "Accounting & Tax Services - SS Advisory | Professional Business Solutions",
+      "Accounting, Tax, VAT & RJSC Services - SS Advisory | Professional Business Solutions",
     description:
-      "Comprehensive accounting, tax planning, and compliance services including bookkeeping, financial reporting, tax preparation, and audit support.",
+      "Comprehensive accounting, tax, VAT, and RJSC services including bookkeeping, return preparation, and audit support.",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
     title:
-      "Accounting & Tax Services - SS Advisory | Professional Business Solutions",
+      "Accounting, Tax, VAT & RJSC Services - SS Advisory | Professional Business Solutions",
     description:
-      "Comprehensive accounting, tax planning, and compliance services including bookkeeping, financial reporting, tax preparation, and audit support.",
+      "Comprehensive accounting, tax, VAT, and RJSC services including bookkeeping, return preparation, and audit support.",
   },
 };
 
 const ServicesPage = () => {
   const services = [
     {
-      title: "Financial Planning & Advisory",
+      title: "Taxation & Compliance Services",
       description:
-        "Strategic financial guidance to help you make informed decisions and achieve your business goals.",
+        "End-to-end tax compliance, filing, and advisory support for individuals and corporations.",
       features: [
-        "Comprehensive financial planning",
-        "Investment strategy development",
-        "Risk assessment and management",
-        "Long-term financial goal setting",
+        "e-TIN registration and basic compliance",
+        "Individual and corporate tax filing",
+        "Corporate tax compliance",
+        "Tax advisory and tax planning",
+        "e-Return preparation and submission",
+        "Corporate withholding tax return preparation",
+        "Tax audit support, hearing, and assessment",
       ],
-      image: "/images/services/service-1.png",
+      image: "/images/services/service-4.png",
     },
     {
-      title: "Portfolio Management",
+      title: "VAT & Indirect Tax Services",
       description:
-        "Expert portfolio management services to optimize your investments and maximize returns.",
+        "Practical VAT support from registration to monthly returns and audit assistance.",
       features: [
-        "Asset allocation and diversification",
-        "Performance monitoring and reporting",
-        "Regular portfolio rebalancing",
-        "Market analysis and insights",
+        "VAT registration and basic compliance",
+        "Monthly VAT return preparation and submission",
+        "VAT compliance management",
+        "VAT audit support, hearing, and assessment",
+        "VAT planning and advisory",
+        "Sector-specific VAT solutions",
       ],
       image: "/images/services/service-2.png",
     },
     {
-      title: "Business & Legal Advocacy",
+      title: "Accounts, Audit & Assurance",
       description:
-        "Professional business and legal support to protect your interests and ensure compliance.",
+        "Reliable bookkeeping, reporting, and assurance services that strengthen financial control.",
       features: [
-        "Business structure consultation",
-        "Contract review and negotiation",
-        "Regulatory compliance guidance",
-        "Legal risk assessment",
+        "Accounting and bookkeeping services",
+        "Financial statement preparation and reporting",
+        "Internal audit and internal control review",
+        "Management and cost accounting",
+        "Payroll processing and compliance accounting",
+        "Specialized assurance and certification",
       ],
-      image: "/images/services/service-3.png",
+      image: "/images/services/service-1.png",
     },
     {
-      title: "Tax & Compliance Services",
+      title: "Company Registration & RJSC",
       description:
-        "Comprehensive tax planning and compliance services to minimize liability and ensure adherence to regulations.",
+        "Complete RJSC support for incorporation, statutory filings, and corporate secretarial services.",
       features: [
-        "Tax planning and optimization",
-        "Tax return preparation and filing",
-        "Compliance monitoring and reporting",
-        "Audit support and representation",
+        "Company formation and registration",
+        "Post-incorporation services",
+        "Annual and statutory compliance",
+        "Partnership and society registration",
+        "Corporate secretarial support",
+        "Winding up and closure services",
+        "Specialized RJSC services",
       ],
-      image: "/images/services/service-4.png",
+      image: "/images/services/service-3.png",
     },
   ];
 

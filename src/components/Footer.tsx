@@ -34,16 +34,16 @@ const Footer = () => {
               </h3>
               <div className="flex flex-col gap-3">
                 <p className="text-white/80 font-urbanist text-lg leading-[25px]">
-                  Comprehensive Accounting
+                  Accounts, Audit & Assurance
                 </p>
                 <p className="text-white/80 font-urbanist text-lg leading-[25px]">
-                  Strategic Tax Planning
+                  Taxation & Compliance
                 </p>
                 <p className="text-white/80 font-urbanist text-lg leading-[25px]">
-                  Business Advisory & Consulting
+                  VAT & Indirect Tax
                 </p>
                 <p className="text-white/80 font-urbanist text-lg leading-[25px]">
-                  Compliance & Regulatory Services
+                  Company Registration & RJSC
                 </p>
               </div>
             </div>

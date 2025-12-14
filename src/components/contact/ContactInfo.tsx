@@ -43,8 +43,8 @@ export default function ContactInfo() {
           </div>
           <div className="w-full h-px bg-gray-200"></div>
           <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-5 sm:leading-6 w-full">
-            Lorem ipsum dolor sit amet consectetur. Sit ullamcorper at tellus ac
-            convallis platea eget. Ut.
+            Call us for quick guidance, appointment scheduling, and immediate
+            support from our Dhaka-based team.
           </p>
         </div>
 
@@ -59,14 +59,14 @@ export default function ContactInfo() {
                 Email
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-gray-900">
-                example@email.com
+                contact@ssadvisorybd.com
               </p>
             </div>
           </div>
           <div className="w-full h-px bg-gray-200"></div>
           <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-5 sm:leading-6 w-full">
-            Lorem ipsum dolor sit amet consectetur. Sit ullamcorper at tellus ac
-            convallis platea eget. Ut.
+            Email us your requirements and documents, and we’ll respond within
+            one business day.
           </p>
         </div>
 
@@ -87,8 +87,8 @@ export default function ContactInfo() {
           </div>
           <div className="w-full h-px bg-gray-200"></div>
           <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-5 sm:leading-6 w-full">
-            Lorem ipsum dolor sit amet consectetur. Sit ullamcorper at tellus ac
-            convallis platea eget. Ut.
+            Visit our Dhaka office for in-person consultations. Please book an
+            appointment in advance so we can prepare for your needs.
           </p>
         </div>
       </div>

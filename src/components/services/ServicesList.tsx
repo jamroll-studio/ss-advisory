@@ -71,10 +71,10 @@ const ServicesList: React.FC<ServicesListProps> = ({
                       {service.features.map((feature, featureIndex) => (
                         <div
                           key={featureIndex}
-                          className="flex items-center gap-2"
+                          className="flex items-start gap-2"
                         >
                           <Check className="w-6 h-6 text-[#204199] flex-shrink-0" />
-                          <span className="text-sm md:text-lg lg:text-xl lg:leading-7 text-[#545a62] flex-1">
+                          <span className="text-sm md:text-lg lg:text-xl lg:leading-7 text-[#545a62] flex-1 min-w-0 whitespace-normal break-words">
                             {feature}
                           </span>
                         </div>

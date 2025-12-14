@@ -39,7 +39,7 @@ export default function ServicesFooter({
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-[#ff6b35]" />
                     <span className="text-xs sm:text-sm md:text-base">
-                      +1 (555) 123-4567
+                      +880 1752-143459
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -52,7 +52,7 @@ export default function ServicesFooter({
                       <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                     </svg>
                     <span className="text-xs sm:text-sm md:text-base">
-                      contact@ssadvisory.com
+                      contact@ssadvisorybd.com
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -68,9 +68,9 @@ export default function ServicesFooter({
                       />
                     </svg>
                     <span className="text-xs sm:text-sm md:text-base">
-                      123 Business Ave, Suite 100
+                      House 654 (3rd Floor), Road 09 Mirpur DOHS
                       <br />
-                      New York, NY 10001
+                      Dhaka 1216, Bangladesh
                     </span>
                   </div>
                 </div>
@@ -86,7 +86,7 @@ export default function ServicesFooter({
                       href="#"
                       className="hover:text-[#ff6b35] transition-colors"
                     >
-                      Bookkeeping & Accounting
+                      Accounts, Audit & Assurance
                     </a>
                   </li>
                   <li>
@@ -94,7 +94,7 @@ export default function ServicesFooter({
                       href="#"
                       className="hover:text-[#ff6b35] transition-colors"
                     >
-                      Tax Planning & Preparation
+                      Taxation & Compliance
                     </a>
                   </li>
                   <li>
@@ -102,7 +102,7 @@ export default function ServicesFooter({
                       href="#"
                       className="hover:text-[#ff6b35] transition-colors"
                     >
-                      Compliance & Audit Support
+                      VAT & Indirect Tax
                     </a>
                   </li>
                   <li>
@@ -110,7 +110,7 @@ export default function ServicesFooter({
                       href="#"
                       className="hover:text-[#ff6b35] transition-colors"
                     >
-                      Payroll Processing
+                      Company Registration & RJSC
                     </a>
                   </li>
                 </ul>
@@ -125,7 +125,7 @@ export default function ServicesFooter({
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs sm:text-sm md:text-base">
-              &copy; 2024 SS Advisory. All rights reserved.
+              &copy; 2025 SS Advisory. All rights reserved.
             </p>
             <div className="flex gap-6 text-xs sm:text-sm md:text-base">
               <a href="#" className="hover:text-[#ff6b35] transition-colors">
